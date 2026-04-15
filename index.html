@@ -15,25 +15,89 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #0a0a0a;
             color: #ffffff;
             scroll-behavior: smooth;
+            overflow-x: hidden;
+            position: relative;
+            transition: background 0.3s, color 0.3s;
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Tema Claro */
+        body.light {
+            background: #f5f5f5;
+            color: #333;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        body.light .service-card,
+        body.light .feature-card,
+        body.light .testimonial-card,
+        body.light .faq-item,
+        body.light .price-box,
+        body.light .quiz-section {
+            background: white;
+            border-color: #ddd;
         }
 
+        body.light .header {
+            background: rgba(255,255,255,0.95);
+            border-bottom-color: #ddd;
+        }
+
+        body.light .nav a {
+            color: #333;
+        }
+
+        body.light .hero {
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+        }
+
+        body.light .hero p,
+        body.light .stat-label {
+            color: #666;
+        }
+
+        /* Tema Escuro (padrão) */
+        body.dark {
+            background: #0a0a0a;
+            color: #ffffff;
+        }
+
+        body.dark .service-card,
+        body.dark .feature-card,
+        body.dark .testimonial-card,
+        body.dark .faq-item,
+        body.dark .price-box,
+        body.dark .quiz-section {
+            background: linear-gradient(135deg, #1a1a1a, #141414);
+            border-color: rgba(0, 255, 136, 0.2);
+        }
+
+        body.dark .header {
+            background: rgba(10,10,10,0.95);
+            border-bottom-color: rgba(0,255,136,0.3);
+        }
+
+        /* Canvas para efeito constelação */
+        #constellationCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .header, .hero, .section, .footer, .whatsapp-float, .back-to-top {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
         .header {
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(20px);
-            padding: 18px 40px;
+            padding: 15px 40px;
             position: fixed;
             width: 100%;
             top: 0;
@@ -43,7 +107,7 @@
         }
 
         .header.scrolled {
-            padding: 12px 40px;
+            padding: 10px 40px;
         }
 
         .header-content {
@@ -58,16 +122,17 @@
 
         .logo {
             font-size: 28px;
-            font-weight: 900;
+            font-weight: 800;
             background: linear-gradient(135deg, #00ff88, #00ccff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            cursor: pointer;
         }
 
         .nav {
             display: flex;
-            gap: 40px;
+            gap: 35px;
         }
 
         .nav a {
@@ -81,16 +146,27 @@
             color: #00ff88;
         }
 
+        .theme-toggle {
+            background: rgba(0,255,136,0.2);
+            border: none;
+            color: #00ff88;
+            padding: 8px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* Botões */
         .btn {
             display: inline-block;
-            padding: 14px 38px;
-            border-radius: 60px;
+            padding: 12px 28px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 600;
             transition: all 0.3s;
             cursor: pointer;
             border: none;
-            font-size: 15px;
+            font-size: 14px;
         }
 
         .btn-primary {
@@ -108,15 +184,18 @@
             color: white;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
+        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             padding: 120px 40px 80px;
             background: radial-gradient(ellipse at 30% 40%, rgba(0, 255, 136, 0.1), transparent 60%);
+            position: relative;
+            overflow: hidden;
         }
 
         .hero-content {
@@ -139,8 +218,8 @@
         }
 
         .hero h1 {
-            font-size: 64px;
-            font-weight: 900;
+            font-size: 56px;
+            font-weight: 800;
             line-height: 1.1;
             margin-bottom: 20px;
         }
@@ -159,6 +238,7 @@
             display: flex;
             gap: 40px;
             margin-top: 30px;
+            flex-wrap: wrap;
         }
 
         .stat-number {
@@ -167,8 +247,14 @@
             color: #00ff88;
         }
 
+        .hero-icon {
+            font-size: 150px;
+            text-align: center;
+        }
+
+        /* Seções */
         .section {
-            padding: 100px 40px;
+            padding: 80px 40px;
         }
 
         .section-dark {
@@ -182,59 +268,84 @@
 
         .section-title {
             text-align: center;
-            font-size: 48px;
+            font-size: 42px;
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .section-title span {
             color: #00ff88;
         }
 
+        .section-subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 50px;
+            font-size: 16px;
+        }
+
+        /* Cards de Serviços */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
         }
 
         .service-card {
             background: linear-gradient(135deg, #1a1a1a, #141414);
             border-radius: 20px;
-            padding: 40px 25px;
-            text-align: center;
+            overflow: hidden;
             transition: all 0.4s;
             border: 1px solid rgba(0, 255, 136, 0.2);
+            cursor: pointer;
         }
 
         .service-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(0, 255, 136, 0.6);
+            border-color: #00ff88;
+            box-shadow: 0 20px 30px rgba(0,255,136,0.2);
         }
 
-        .service-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
+        .service-image {
+            height: 180px;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
         }
 
-        .service-card h3 {
-            font-size: 20px;
+        .service-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .service-info h3 {
+            font-size: 16px;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             color: #00ff88;
         }
 
+        /* Diferenciais */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            gap: 25px;
         }
 
         .feature-card {
             background: #1a1a1a;
             border-radius: 16px;
-            padding: 30px;
+            padding: 25px;
             text-align: center;
             border: 1px solid rgba(0, 255, 136, 0.2);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff88;
         }
 
         .feature-icon {
@@ -249,17 +360,35 @@
             margin-bottom: 10px;
         }
 
+        /* Contador de Clientes */
+        .counter-section {
+            background: linear-gradient(135deg, #00ff88, #00cc6e);
+            text-align: center;
+            padding: 60px 20px;
+            color: #0a0a0a;
+        }
+
+        .counter-number {
+            font-size: 64px;
+            font-weight: 800;
+        }
+
+        .counter-label {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
         /* Quiz */
         .quiz-section {
-            background: linear-gradient(135deg, #0a0a0a, #0f0f0f);
+            background: linear-gradient(135deg, #1a1a1a, #141414);
             border-radius: 30px;
-            padding: 50px;
+            padding: 40px;
             margin-top: 40px;
             border: 1px solid rgba(0, 255, 136, 0.3);
         }
 
         .quiz-question {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .quiz-question label {
@@ -273,12 +402,12 @@
         .quiz-options {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 12px;
         }
 
         .quiz-option {
-            background: #1a1a1a;
-            padding: 12px 24px;
+            background: #0a0a0a;
+            padding: 10px 20px;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s;
@@ -306,26 +435,44 @@
             display: none;
         }
 
-        .result-box h3 {
-            color: #00ff88;
-            margin-bottom: 15px;
-        }
-
-        .recommendation-price {
-            font-size: 36px;
-            font-weight: 800;
-            color: #00ff88;
-            margin: 15px 0;
+        /* Preços */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .price-box {
             background: linear-gradient(135deg, #1a1a1a, #141414);
-            max-width: 500px;
-            margin: 40px auto 0;
-            padding: 40px;
             border-radius: 20px;
+            padding: 35px;
             text-align: center;
             border: 1px solid rgba(0, 255, 136, 0.3);
+            transition: all 0.3s;
+        }
+
+        .price-box:hover {
+            transform: translateY(-5px);
+            border-color: #00ff88;
+        }
+
+        .price-box.popular {
+            border: 2px solid #00ff88;
+            position: relative;
+        }
+
+        .price-box.popular::before {
+            content: '🔥 MAIS POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #00ff88;
+            color: #0a0a0a;
+            padding: 4px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
         }
 
         .price-value {
@@ -335,28 +482,188 @@
             margin: 20px 0;
         }
 
+        .price-box ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .price-box li {
+            padding: 10px 0;
+            color: #ccc;
+        }
+
+        .price-box li i {
+            color: #00ff88;
+            margin-right: 8px;
+        }
+
+        /* Depoimentos */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .testimonial-card {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .testimonial-stars {
+            color: #ffc107;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .testimonial-name {
+            font-weight: 700;
+            color: #00ff88;
+        }
+
+        /* FAQ */
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: #1a1a1a;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            padding: 20px;
+            cursor: pointer;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .faq-question {
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s;
+            color: #aaa;
+            margin-top: 10px;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        /* Contato */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            background: #0a0a0a;
+            color: white;
+            font-size: 14px;
+        }
+
+        /* Footer */
         .footer {
             background: #0a0a0a;
-            padding: 60px 40px 40px;
+            padding: 50px 40px 30px;
             text-align: center;
             border-top: 1px solid rgba(0, 255, 136, 0.2);
         }
 
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: #666;
+            font-size: 22px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #00ff88;
+        }
+
+        /* Botão WhatsApp Flutuante */
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
             right: 20px;
             background: #25D366;
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
+            font-size: 28px;
             text-decoration: none;
             color: white;
             z-index: 999;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* Botão Voltar ao Topo */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #00ff88;
+            color: #0a0a0a;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
         }
 
         @media (max-width: 1024px) {
@@ -365,29 +672,33 @@
                 text-align: center;
             }
             .hero h1 { font-size: 42px; }
+            .hero-icon { font-size: 100px; }
+            .section-title { font-size: 32px; }
         }
 
         @media (max-width: 768px) {
             .nav { display: none; }
             .hero h1 { font-size: 32px; }
-            .section-title { font-size: 32px; }
-            .quiz-section { padding: 25px; }
-            .quiz-options { gap: 10px; }
-            .quiz-option { padding: 8px 16px; font-size: 12px; }
+            .section { padding: 60px 20px; }
+            .contact-form { padding: 25px; }
         }
     </style>
 </head>
-<body>
+<body class="dark">
+
+    <canvas id="constellationCanvas"></canvas>
+
     <header class="header" id="header">
         <div class="header-content">
-            <div class="logo">🚀 CRIO SITE</div>
+            <div class="logo" onclick="window.location.href='#home'">🚀 CRIO SITE</div>
             <div class="nav">
                 <a href="#home">Início</a>
                 <a href="#services">Serviços</a>
-                <a href="#quiz">Análise</a>
-                <a href="#pricing">Preços</a>
+                <a href="#diferenciais">Diferenciais</a>
+                <a href="#pricing">Planos</a>
+                <a href="#contact">Contato</a>
             </div>
-            <a href="https://wa.me/5521998912513" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Fazer Orçamento</a>
+          
         </div>
     </header>
 
@@ -396,73 +707,79 @@
             <div>
                 <div class="hero-badge"><i class="fas fa-rocket"></i> SITES PROFISSIONAIS</div>
                 <h1>Crio sites que <span>aumentam</span> suas vendas</h1>
-                <p>Você sabia que ter um site pode aumentar suas vendas em até 70%? Sites modernos, rápidos e responsivos para o seu negócio.</p>
+                <p>Design moderno • WhatsApp integrado • Responsivo • Hospedagem inclusa</p>
+                <div class="hero-buttons">
+                    <a href="#services" class="btn btn-primary"><i class="fas fa-utensils"></i> Ver serviços</a>
+                    <a href="https://wa.me/5521998912513" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Fazer orçamento</a>
+                </div>
                 <div class="hero-stats">
                     <div><div class="stat-number">50+</div><div>Sites criados</div></div>
                     <div><div class="stat-number">4.9 ★</div><div>Avaliações</div></div>
                     <div><div class="stat-number">100%</div><div>Satisfação</div></div>
                 </div>
             </div>
-            <div>
-                <div style="background: linear-gradient(135deg, #1a1a1a, #0a0a0a); border-radius: 20px; padding: 40px; text-align: center; border: 2px solid rgba(0,255,136,0.3);">
-                    <div style="font-size: 80px;">🚀</div>
-                    <div style="font-size: 28px; font-weight: 800; color: #00ff88; margin: 15px 0;">CRIO SITE</div>
-                    <div>Profissionalismo e resultados</div>
-                </div>
+            <div class="hero-icon">
+                <i class="fas fa-laptop-code"></i>
             </div>
         </div>
     </section>
 
+    <!-- Contador de Clientes com Efeito de Digitação -->
+    <div class="counter-section">
+        <div class="container">
+            <div class="counter-number" id="clientCounter">0</div>
+            <div class="counter-label">Clientes atendidos com sucesso</div>
+        </div>
+    </div>
+
+    <!-- Por que escolher a CRIO SITE -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Por que escolher a <span>CRIO SITE</span>?</h2>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p style="color: #ccc; line-height: 1.8; margin-bottom: 30px;">
+                    Crio sites profissionais que realmente geram resultados para o seu negócio. 
+                    Com mais de 50 projetos entregues e clientes satisfeitos em todo o Brasil, 
+                    meu compromisso é entregar um site que atenda às suas necessidades e supere 
+                    suas expectativas.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços -->
     <section id="services" class="section section-dark">
         <div class="container">
-            <h2 class="section-title">Crio sites para <span>todos os negócios</span></h2>
-            <div class="services-grid">
-                <div class="service-card"><div class="service-icon">🛍️</div><h3>Lojas de Roupas</h3><p>Vitrine digital com carrinho de compras</p></div>
-                <div class="service-card"><div class="service-icon">🍔</div><h3>Restaurantes</h3><p>Cardápio digital e pedidos via WhatsApp</p></div>
-                <div class="service-card"><div class="service-icon">🏋️</div><h3>Academias</h3><p>Horários, serviços e localização</p></div>
-                <div class="service-card"><div class="service-icon">🍦</div><h3>Sorveterias</h3><p>Cardápio de sabores e promoções</p></div>
-                <div class="service-card"><div class="service-icon">💈</div><h3>Barbearias</h3><p>Agendamento online integrado</p></div>
-                <div class="service-card"><div class="service-icon">📚</div><h3>Cursos/E-books</h3><p>Venda de conteúdo digital</p></div>
-            </div>
+            <h2 class="section-title">Atendo <span>diversas profissões</span></h2>
+            <div class="services-grid" id="servicesList"></div>
         </div>
     </section>
 
-    <section id="benefits" class="section">
+    <!-- Diferenciais -->
+    <section id="diferenciais" class="section">
         <div class="container">
-            <h2 class="section-title">O que seu <span>site vai ter</span></h2>
-            <div class="features-grid">
-                <div class="feature-card"><div class="feature-icon">🎨</div><h4>Design exclusivo</h4><p>Criado especialmente para o seu negócio</p></div>
-                <div class="feature-card"><div class="feature-icon">📱</div><h4>Responsivo</h4><p>Funciona no celular, tablet e computador</p></div>
-                <div class="feature-card"><div class="feature-icon">💬</div><h4>WhatsApp integrado</h4><p>Botão direto para contato e pedidos</p></div>
-                <div class="feature-card"><div class="feature-icon">📍</div><h4>Localização com mapa</h4><p>Mostre onde você está</p></div>
-                <div class="feature-card"><div class="feature-icon">⏰</div><h4>Horário de funcionamento</h4><p>Clientes sabem quando encontrar você</p></div>
-                <div class="feature-card"><div class="feature-icon">☁️</div><h4>Hospedagem inclusa</h4><p>Site no ar 24h sem custo extra</p></div>
-            </div>
+            <h2 class="section-title">Nossos <span>Diferenciais</span></h2>
+            <div class="features-grid" id="featuresList"></div>
         </div>
     </section>
 
-    <!-- QUIZ INTERATIVO -->
+    <!-- Quiz Interativo -->
     <section id="quiz" class="section section-dark">
         <div class="container">
             <h2 class="section-title">Descubra o <span>site ideal</span> para seu negócio</h2>
-            <p class="section-subtitle" style="text-align: center; color: #888; margin-bottom: 30px;">Responda 4 perguntas e receba uma recomendação personalizada</p>
-            
             <div class="quiz-section">
                 <div id="quizContainer">
-                    <!-- Pergunta 1 -->
                     <div class="quiz-question">
                         <label>1️⃣ Qual o seu tipo de negócio?</label>
                         <div class="quiz-options" id="q1">
                             <div class="quiz-option" data-value="loja">🛍️ Loja física</div>
-                            <div class="quiz-option" data-value="restaurante">🍔 Restaurante/Sorveteria</div>
+                            <div class="quiz-option" data-value="restaurante">🍔 Restaurante</div>
                             <div class="quiz-option" data-value="academia">🏋️ Academia</div>
                             <div class="quiz-option" data-value="barbearia">💈 Barbearia</div>
                             <div class="quiz-option" data-value="servicos">📋 Serviços</div>
                             <div class="quiz-option" data-value="online">📦 Venda online</div>
                         </div>
                     </div>
-
-                    <!-- Pergunta 2 -->
                     <div class="quiz-question">
                         <label>2️⃣ Você quer vender diretamente pelo site?</label>
                         <div class="quiz-options" id="q2">
@@ -470,8 +787,6 @@
                             <div class="quiz-option" data-value="nao">❌ Não</div>
                         </div>
                     </div>
-
-                    <!-- Pergunta 3 -->
                     <div class="quiz-question">
                         <label>3️⃣ Precisa de agendamento online?</label>
                         <div class="quiz-options" id="q3">
@@ -479,19 +794,8 @@
                             <div class="quiz-option" data-value="nao">❌ Não</div>
                         </div>
                     </div>
-
-                    <!-- Pergunta 4 -->
-                    <div class="quiz-question">
-                        <label>4️⃣ Tem produtos/cardápio para mostrar?</label>
-                        <div class="quiz-options" id="q4">
-                            <div class="quiz-option" data-value="sim">✅ Sim</div>
-                            <div class="quiz-option" data-value="nao">❌ Não</div>
-                        </div>
-                    </div>
-
-                    <button class="btn btn-primary" onclick="analyzeBusiness()" style="width: 100%; margin-top: 20px;">🔍 Analisar meu negócio</button>
+                    <button class="btn btn-primary" onclick="analyzeBusiness()" style="width: 100%;">🔍 Analisar meu negócio</button>
                 </div>
-
                 <div id="resultBox" class="result-box">
                     <h3>🔍 ANÁLISE COMPLETA</h3>
                     <div id="resultDetails"></div>
@@ -502,13 +806,40 @@
         </div>
     </section>
 
+    <!-- Planos e Preços -->
     <section id="pricing" class="section">
         <div class="container">
-            <h2 class="section-title">Preços <span>acessíveis</span></h2>
-            <div class="price-box">
-                <div class="price-value">A partir de <span style="font-size: 48px;">R$ 297</span></div>
-                <p>Site completo, hospedagem inclusa, suporte por 30 dias</p>
-                <a href="https://wa.me/5521998912513" class="btn btn-primary" style="margin-top: 20px;"><i class="fab fa-whatsapp"></i> Solicitar Orçamento</a>
+            <h2 class="section-title">Planos e <span>Preços</span></h2>
+            <div class="pricing-grid" id="pricingList"></div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section id="testimonials" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">O que dizem <span>meus clientes</span></h2>
+            <div class="testimonials-grid" id="testimonialsList"></div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+        <div class="container">
+            <h2 class="section-title">Perguntas <span>Frequentes</span></h2>
+            <div class="faq-grid" id="faqList"></div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contact" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">Entre em <span>contato</span></h2>
+            <div class="contact-form">
+                <div class="form-group"><input type="text" id="contactName" placeholder="Seu nome"></div>
+                <div class="form-group"><input type="tel" id="contactPhone" placeholder="Seu WhatsApp"></div>
+                <div class="form-group"><input type="email" id="contactEmail" placeholder="Seu e-mail"></div>
+                <div class="form-group"><textarea id="contactMessage" rows="4" placeholder="Sua mensagem"></textarea></div>
+                <button class="btn btn-primary" onclick="sendContact()" style="width: 100%;">📨 Enviar mensagem</button>
             </div>
         </div>
     </section>
@@ -516,138 +847,288 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-logo" style="font-size: 28px; font-weight: 800; background: linear-gradient(135deg, #00ff88, #00ccff); -webkit-background-clip: text; background-clip: text; color: transparent;">🚀 CRIO SITE</div>
-            <p style="margin: 20px 0;">📱 WhatsApp: (21) 99891-2513</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/crio.siteoficial" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/5521998912513" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>📱 WhatsApp: (21) 99891-2513</p>
             <p class="footer-copy">© 2024 CRIO SITE - Todos os direitos reservados</p>
         </div>
     </footer>
 
     <a href="https://wa.me/5521998912513" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</div>
 
     <script>
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+        // ========== EFEITO CONSTELAÇÃO ==========
+        const canvas = document.getElementById('constellationCanvas');
+        const ctx = canvas.getContext('2d');
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        let particles = [];
+        const PARTICLE_COUNT = 80;
+        const CONNECTION_DISTANCE = 150;
+
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = (Math.random() - 0.5) * 0.3;
+                this.radius = 1.5;
             }
-        });
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0) this.x = width;
+                if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height;
+                if (this.y > height) this.y = 0;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#00ff88';
+                ctx.fill();
+            }
+        }
 
-        let selectedAnswers = {
-            q1: null,
-            q2: null,
-            q3: null,
-            q4: null
-        };
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+        }
 
-        // Configurar eventos de clique nas opções
-        document.querySelectorAll('.quiz-options').forEach((optionsContainer, index) => {
-            const questionKey = `q${index + 1}`;
-            optionsContainer.querySelectorAll('.quiz-option').forEach(option => {
-                option.addEventListener('click', () => {
-                    // Remove selected de todas as opções da mesma pergunta
-                    optionsContainer.querySelectorAll('.quiz-option').forEach(opt => {
-                        opt.classList.remove('selected');
-                    });
-                    option.classList.add('selected');
-                    selectedAnswers[questionKey] = option.getAttribute('data-value');
+        function drawLines() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < CONNECTION_DISTANCE) {
+                        const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.3;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(0, 255, 136, ${opacity})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            for (let particle of particles) {
+                particle.update();
+                particle.draw();
+            }
+            drawLines();
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+        resizeCanvas();
+        initParticles();
+        animate();
+
+        // ========== CONTADOR COM EFEITO DE DIGITAÇÃO ==========
+        const counters = [5, 50, 500];
+        let counterIndex = 0;
+        const counterElement = document.getElementById('clientCounter');
+        
+        function typeCounter() {
+            if (counterIndex < counters.length) {
+                counterElement.innerText = counters[counterIndex];
+                counterIndex++;
+                setTimeout(typeCounter, 800);
+            }
+        }
+        typeCounter();
+
+        // ========== DADOS ==========
+        const services = [
+            "Advogados", "Médicos", "Dentistas", "Psicólogos", "Nutricionistas",
+            "Fisioterapeutas", "Personal Trainer", "Esteticistas", "Salões de Beleza", "Barbeiros",
+            "Corretores de Imóveis", "Contadores", "Pet Shop", "Veterinários", "Academias",
+            "Restaurantes", "Lojas em geral", "Empresas", "Autônomos"
+        ];
+        const icons = ["⚖️", "🩺", "🦷", "🧠", "🥗", "💪", "🏋️", "💆", "💇", "✂️", "🏠", "📊", "🐾", "🐕", "🏋️", "🍔", "🛍️", "🏢", "👨‍💼"];
+
+        const features = [
+            { icon: "🎨", title: "Design exclusivo", desc: "Criado especialmente para seu negócio" },
+            { icon: "📱", title: "100% Responsivo", desc: "Funciona em celular, tablet e computador" },
+            { icon: "💬", title: "WhatsApp integrado", desc: "Botão direto para contato e pedidos" },
+            { icon: "📍", title: "Localização com mapa", desc: "Mostre onde você está" },
+            { icon: "⏰", title: "Horário de funcionamento", desc: "Clientes sabem quando encontrar" },
+            { icon: "☁️", title: "Hospedagem inclusa", desc: "Site no ar 24h por 1 ano" },
+            { icon: "🔒", title: "Suporte 30 dias", desc: "Ajuda e manutenção no primeiro mês" },
+            { icon: "⚡", title: "Carregamento rápido", desc: "Site otimizado para velocidade" },
+            { icon: "🔍", title: "SEO amigável", desc: "Bem posicionado no Google" },
+            { icon: "✏️", title: "Edições inclusas", desc: "Até 3 alterações após a entrega" }
+        ];
+
+        const plans = [
+            { name: "Básico", price: "297", popular: false, features: ["Site completo", "1 mês de suporte", "Hospedagem inclusa", "WhatsApp integrado"] },
+            { name: "Profissional", price: "397", popular: true, features: ["Tudo do Básico", "Até 3 alterações", "3 meses de suporte", "Design exclusivo"] },
+            { name: "Premium", price: "497", popular: false, features: ["Tudo do Profissional", "6 meses de suporte", "Manutenção mensal", "Prioridade no atendimento"] }
+        ];
+
+        const testimonials = [
+            { name: "João Silva", text: "Site ficou incrível! Atendimento rápido e profissional.", stars: 5 },
+            { name: "Maria Santos", text: "Recomendo demais! Fez exatamente o que eu precisava.", stars: 5 },
+            { name: "Carlos Oliveira", text: "Meu negócio decolou depois do site. Valeu cada centavo!", stars: 5 }
+        ];
+
+        const faq = [
+            { q: "Quanto tempo leva para ficar pronto?", a: "Entre 3 a 7 dias úteis, dependendo da complexidade." },
+            { q: "Preciso pagar hospedagem?", a: "Hospedagem inclusa por 1 ano no valor do site." },
+            { q: "Posso editar depois?", a: "Sim, ofereço manutenção mensal a partir de R$ 47." },
+            { q: "Aceita cartão?", a: "Sim, Pix, cartão de crédito e boleto." },
+            { q: "Tem garantia?", a: "Sim, 30 dias após a entrega." }
+        ];
+
+        function renderServices() {
+            const container = document.getElementById('servicesList');
+            container.innerHTML = services.map((s, i) => `
+                <div class="service-card">
+                    <div class="service-image">${icons[i % icons.length]}</div>
+                    <div class="service-info"><h3>${s}</h3></div>
+                </div>
+            `).join('');
+        }
+
+        function renderFeatures() {
+            const container = document.getElementById('featuresList');
+            container.innerHTML = features.map(f => `
+                <div class="feature-card">
+                    <div class="feature-icon">${f.icon}</div>
+                    <h4>${f.title}</h4>
+                    <p>${f.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderPricing() {
+            const container = document.getElementById('pricingList');
+            container.innerHTML = plans.map(p => `
+                <div class="price-box ${p.popular ? 'popular' : ''}">
+                    <h3>${p.name}</h3>
+                    <div class="price-value">R$ ${p.price}</div>
+                    <ul>${p.features.map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join('')}</ul>
+                    <a href="https://wa.me/5521998912513" class="btn btn-primary">Escolher plano</a>
+                </div>
+            `).join('');
+        }
+
+        function renderTestimonials() {
+            const container = document.getElementById('testimonialsList');
+            container.innerHTML = testimonials.map(t => `
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">${'★'.repeat(t.stars)}${'☆'.repeat(5-t.stars)}</div>
+                    <p class="testimonial-text">"${t.text}"</p>
+                    <div class="testimonial-name">- ${t.name}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderFAQ() {
+            const container = document.getElementById('faqList');
+            container.innerHTML = faq.map((f, i) => `
+                <div class="faq-item" onclick="toggleFAQ(${i})">
+                    <div class="faq-question">${f.q}<span>▼</span></div>
+                    <div class="faq-answer">${f.a}</div>
+                </div>
+            `).join('');
+        }
+
+        function toggleFAQ(index) {
+            const items = document.querySelectorAll('.faq-item');
+            items[index].classList.toggle('active');
+        }
+
+        function sendContact() {
+            const name = document.getElementById('contactName').value;
+            const phone = document.getElementById('contactPhone').value;
+            const email = document.getElementById('contactEmail').value;
+            const message = document.getElementById('contactMessage').value;
+            if (!name || !phone || !message) {
+                alert('Preencha nome, telefone e mensagem!');
+                return;
+            }
+            const msg = `*CRIO SITE - CONTATO*%0A%0A*Nome:* ${name}%0A*Telefone:* ${phone}%0A*E-mail:* ${email}%0A*Mensagem:* ${message}`;
+            window.open(`https://wa.me/5521998912513?text=${msg}`, '_blank');
+        }
+
+        // Quiz
+        let selectedAnswers = { q1: null, q2: null, q3: null };
+        document.querySelectorAll('.quiz-options').forEach((container, idx) => {
+            const qKey = `q${idx + 1}`;
+            container.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.addEventListener('click', () => {
+                    container.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+                    opt.classList.add('selected');
+                    selectedAnswers[qKey] = opt.getAttribute('data-value');
                 });
             });
         });
 
         function analyzeBusiness() {
-            // Verificar se todas as perguntas foram respondidas
-            if (!selectedAnswers.q1 || !selectedAnswers.q2 || !selectedAnswers.q3 || !selectedAnswers.q4) {
-                alert('Por favor, responda todas as perguntas!');
+            if (!selectedAnswers.q1 || !selectedAnswers.q2 || !selectedAnswers.q3) {
+                alert('Responda todas as perguntas!');
                 return;
             }
-
-            const businessType = selectedAnswers.q1;
-            const wantsSell = selectedAnswers.q2;
-            const needsSchedule = selectedAnswers.q3;
-            const hasProducts = selectedAnswers.q4;
-
-            let recommendation = '';
-            let price = '';
-            let description = '';
-
-            // Lógica de recomendação
-            if (businessType === 'restaurante' || businessType === 'sorveteria') {
-                recommendation = '🍔 SITE PARA RESTAURANTE/SORVETERIA';
-                description = 'Cardápio digital interativo, botão WhatsApp para pedidos, galeria de fotos e localização.';
-                price = 'R$ 297';
-            } 
-            else if (businessType === 'academia') {
-                recommendation = '🏋️ SITE PARA ACADEMIA';
-                description = 'Horários de funcionamento, lista de serviços, quadra de vôlei, localização com mapa e WhatsApp.';
-                price = 'R$ 297';
+            let recommendation = '', price = '';
+            if (selectedAnswers.q1 === 'loja' && selectedAnswers.q2 === 'sim') {
+                recommendation = '🛍️ LOJA VIRTUAL'; price = 'R$ 397';
+            } else if (selectedAnswers.q1 === 'restaurante') {
+                recommendation = '🍔 SITE PARA RESTAURANTE'; price = 'R$ 297';
+            } else if (selectedAnswers.q1 === 'academia') {
+                recommendation = '🏋️ SITE PARA ACADEMIA'; price = 'R$ 297';
+            } else if (selectedAnswers.q1 === 'barbearia') {
+                recommendation = '💈 SITE PARA BARBEARIA'; price = 'R$ 297';
+            } else {
+                recommendation = '🌐 SITE PERSONALIZADO'; price = 'R$ 297 - R$ 497';
             }
-            else if (businessType === 'barbearia') {
-                recommendation = '💈 SITE PARA BARBEARIA';
-                description = 'Agendamento online integrado ao WhatsApp, serviços, preços, galeria de cortes e localização.';
-                price = 'R$ 297';
-            }
-            else if (businessType === 'loja' && wantsSell === 'sim') {
-                recommendation = '🛍️ LOJA VIRTUAL';
-                description = 'Vitrine de produtos, carrinho de compras, catálogo com fotos e preços, WhatsApp integrado.';
-                price = 'R$ 397';
-            }
-            else if (businessType === 'online' && wantsSell === 'sim') {
-                recommendation = '📦 E-COMMERCE COMPLETO';
-                description = 'Loja virtual completa, catálogo de produtos, carrinho, formas de pagamento e entrega.';
-                price = 'R$ 497';
-            }
-            else if (businessType === 'servicos') {
-                recommendation = '📋 SITE INSTITUCIONAL';
-                description = 'Apresentação da empresa, serviços oferecidos, portfólio, depoimentos e formulário de contato.';
-                price = 'R$ 297';
-            }
-            else {
-                recommendation = '🌐 SITE PERSONALIZADO';
-                description = 'Site sob medida para o seu negócio, com todas as funcionalidades que você precisa.';
-                price = 'R$ 297 - R$ 497';
-            }
-
-            // Ajustes adicionais
-            if (needsSchedule === 'sim' && businessType !== 'barbearia') {
-                description += ' Inclui sistema de agendamento online.';
-                price = price === 'R$ 297' ? 'R$ 347' : 'R$ 447';
-            }
-
-            if (hasProducts === 'sim' && wantsSell === 'sim') {
-                description += ' Catálogo de produtos com fotos e preços.';
-            }
-
-            // Exibir resultado
-            document.getElementById('resultDetails').innerHTML = `
-                <p><strong>✅ Tipo de negócio:</strong> ${getBusinessName(businessType)}</p>
-                <p><strong>✅ Vendas online:</strong> ${wantsSell === 'sim' ? 'Sim' : 'Não'}</p>
-                <p><strong>✅ Agendamento:</strong> ${needsSchedule === 'sim' ? 'Sim' : 'Não'}</p>
-                <p><strong>✅ Produtos/Cardápio:</strong> ${hasProducts === 'sim' ? 'Sim' : 'Não'}</p>
-                <div style="margin: 20px 0; padding: 15px; background: rgba(0,255,136,0.1); border-radius: 12px;">
-                    <strong>👉 RECOMENDAÇÃO:</strong><br>
-                    ${recommendation}<br><br>
-                    ${description}
-                </div>
-            `;
+            document.getElementById('resultDetails').innerHTML = `<p><strong>✅ Tipo de negócio:</strong> ${selectedAnswers.q1}</p><p><strong>✅ Recomendação:</strong> ${recommendation}</p>`;
             document.getElementById('resultPrice').innerHTML = `💰 Preço sugerido: ${price}`;
             document.getElementById('resultBox').style.display = 'block';
-            
-            // Rolar para o resultado
-            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
-        function getBusinessName(value) {
-            const names = {
-                'loja': 'Loja física',
-                'restaurante': 'Restaurante/Sorveteria',
-                'academia': 'Academia',
-                'barbearia': 'Barbearia',
-                'servicos': 'Serviços',
-                'online': 'Venda online'
-            };
-            return names[value] || value;
+        // Botão voltar ao topo
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            const backBtn = document.getElementById('backToTop');
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+            if (window.scrollY > 300) backBtn.classList.add('show');
+            else backBtn.classList.remove('show');
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // Tema claro/escuro
+        function toggleTheme() {
+            document.body.classList.toggle('light');
+            const btn = document.querySelector('.theme-toggle');
+            if (document.body.classList.contains('light')) btn.innerHTML = '☀️ Light';
+            else btn.innerHTML = '🌙 Dark';
+        }
+
+        renderServices();
+        renderFeatures();
+        renderPricing();
+        renderTestimonials();
+        renderFAQ();
     </script>
 </body>
 </html>
