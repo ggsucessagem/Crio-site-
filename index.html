@@ -18,11 +18,10 @@
             background: #0a0a0a;
             color: #ffffff;
             scroll-behavior: smooth;
-            position: relative;
-            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* CANVAS PARA O EFEITO CONSTELAÇÃO */
+        /* Efeito Constelação */
         #constellationCanvas {
             position: fixed;
             top: 0;
@@ -38,15 +37,11 @@
             z-index: 1;
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        /* Header */
         .header {
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(20px);
-            padding: 18px 40px;
+            padding: 15px 40px;
             position: fixed;
             width: 100%;
             top: 0;
@@ -56,7 +51,7 @@
         }
 
         .header.scrolled {
-            padding: 12px 40px;
+            padding: 10px 40px;
         }
 
         .header-content {
@@ -71,12 +66,610 @@
 
         .logo {
             font-size: 28px;
-            font-weight: 900;
+            font-weight: 800;
             background: linear-gradient(135deg, #00ff88, #00ccff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
+
+        .nav {
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #00ff88;
+        }
+
+        /* Botões */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00ff88, #00cc6e);
+            color: #0a0a0a;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.4);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 40px 80px;
+            background: radial-gradient(ellipse at 30% 40%, rgba(0, 255, 136, 0.1), transparent 60%);
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0, 255, 136, 0.15);
+            color: #00ff88;
+            padding: 6px 18px;
+            border-radius: 100px;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #00ff88;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: #00ff88;
+        }
+
+        .hero-icon {
+            font-size: 150px;
+            text-align: center;
+        }
+
+        /* Seções */
+        .section {
+            padding: 80px 40px;
+        }
+
+        .section-dark {
+            background: #0f0f0f;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .section-title span {
+            color: #00ff88;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 50px;
+            font-size: 16px;
+        }
+
+        /* Cards de Serviços com imagens */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #1a1a1a, #141414);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: #00ff88;
+            box-shadow: 0 20px 30px rgba(0,255,136,0.15);
+        }
+
+        .service-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .service-card h3 {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #00ff88;
+        }
+
+        /* Diferenciais */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff88;
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #00ff88;
+            margin-bottom: 10px;
+        }
+
+        /* Preços */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .price-box {
+            background: linear-gradient(135deg, #1a1a1a, #141414);
+            border-radius: 20px;
+            padding: 35px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            transition: all 0.3s;
+        }
+
+        .price-box:hover {
+            transform: translateY(-5px);
+            border-color: #00ff88;
+        }
+
+        .price-box.popular {
+            border: 2px solid #00ff88;
+            position: relative;
+        }
+
+        .price-box.popular::before {
+            content: '🔥 MAIS POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #00ff88;
+            color: #0a0a0a;
+            padding: 4px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .price-value {
+            font-size: 48px;
+            font-weight: 800;
+            color: #00ff88;
+            margin: 20px 0;
+        }
+
+        .price-box ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .price-box li {
+            padding: 10px 0;
+            color: #ccc;
+        }
+
+        .price-box li i {
+            color: #00ff88;
+            margin-right: 8px;
+        }
+
+        /* Depoimentos */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .testimonial-card {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .testimonial-stars {
+            color: #ffc107;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .testimonial-name {
+            font-weight: 700;
+            color: #00ff88;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0a0a0a;
+            padding: 50px 40px 30px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: #666;
+            font-size: 22px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #00ff88;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            text-decoration: none;
+            color: white;
+            z-index: 999;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero h1 { font-size: 42px; }
+            .hero-icon { font-size: 100px; }
+            .section-title { font-size: 32px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav { display: none; }
+            .hero h1 { font-size: 32px; }
+            .section { padding: 60px 20px; }
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .service-image {
+                height: 140px;
+            }
+            .service-card h3 {
+                font-size: 12px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="constellationCanvas"></canvas>
+
+    <header class="header" id="header">
+        <div class="header-content">
+            <div class="logo">🚀 CRIO SITE</div>
+            <div class="nav">
+                <a href="#home">Início</a>
+                <a href="#services">Serviços</a>
+                <a href="#pricing">Planos</a>
+                <a href="#contact">Contato</a>
+            </div>
+            <a href="https://wa.me/5521998912513" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div>
+                <div class="hero-badge"><i class="fas fa-rocket"></i> SITES PROFISSIONAIS</div>
+                <h1>Crio sites que <span>aumentam</span> suas vendas</h1>
+                <p>Design moderno • WhatsApp integrado • Responsivo • Hospedagem inclusa</p>
+                <div class="hero-stats">
+                    <div><div class="stat-number">50+</div><div>Sites criados</div></div>
+                    <div><div class="stat-number">4.9 ★</div><div>Avaliações</div></div>
+                    <div><div class="stat-number">100%</div><div>Satisfação</div></div>
+                </div>
+            </div>
+            <div class="hero-icon">
+                <i class="fas fa-laptop-code"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO DE SERVIÇOS COM IMAGENS REAIS -->
+    <section id="services" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">Atendo <span>diversas profissões</span></h2>
+            <div class="services-grid">
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400');"></div><h3>⚖️ Advogados</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=400');"></div><h3>🩺 Médicos</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=400');"></div><h3>🦷 Dentistas</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400');"></div><h3>🧠 Psicólogos</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400');"></div><h3>🥗 Nutricionistas</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400');"></div><h3>💪 Fisioterapeutas</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400');"></div><h3>🏋️ Personal Trainer</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400');"></div><h3>💆 Esteticistas</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400');"></div><h3>💇 Salões de Beleza</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400');"></div><h3>✂️ Barbeiros</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?w=400');"></div><h3>🏠 Corretores de Imóveis</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400');"></div><h3>📊 Contadores</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1545249390-6bdfa286032f?w=400');"></div><h3>🐾 Pet Shop</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1548767797-d8c844163c4c?w=400');"></div><h3>🐕 Veterinários</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400');"></div><h3>🏋️ Academias</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400');"></div><h3>🍔 Restaurantes</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400');"></div><h3>🛍️ Lojas</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=400');"></div><h3>🏢 Empresas</h3></div>
+                <div class="service-card"><div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400');"></div><h3>👨‍💼 Autônomos</h3></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diferenciais -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Nossos <span>Diferenciais</span></h2>
+            <div class="features-grid">
+                <div class="feature-card"><div class="feature-icon">🎨</div><h4>Design exclusivo</h4><p>Criado especialmente para seu negócio</p></div>
+                <div class="feature-card"><div class="feature-icon">📱</div><h4>100% Responsivo</h4><p>Funciona em celular, tablet e computador</p></div>
+                <div class="feature-card"><div class="feature-icon">💬</div><h4>WhatsApp integrado</h4><p>Botão direto para contato e pedidos</p></div>
+                <div class="feature-card"><div class="feature-icon">📍</div><h4>Localização com mapa</h4><p>Mostre onde você está</p></div>
+                <div class="feature-card"><div class="feature-icon">⏰</div><h4>Horário de funcionamento</h4><p>Clientes sabem quando encontrar</p></div>
+                <div class="feature-card"><div class="feature-icon">☁️</div><h4>Hospedagem inclusa</h4><p>Site no ar 24h por 1 ano</p></div>
+                <div class="feature-card"><div class="feature-icon">🔒</div><h4>Suporte 30 dias</h4><p>Ajuda e manutenção no primeiro mês</p></div>
+                <div class="feature-card"><div class="feature-icon">⚡</div><h4>Carregamento rápido</h4><p>Site otimizado para velocidade</p></div>
+                <div class="feature-card"><div class="feature-icon">🔍</div><h4>SEO amigável</h4><p>Bem posicionado no Google</p></div>
+                <div class="feature-card"><div class="feature-icon">✏️</div><h4>Edições inclusas</h4><p>Até 3 alterações após a entrega</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planos -->
+    <section id="pricing" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">Planos e <span>Preços</span></h2>
+            <div class="pricing-grid">
+                <div class="price-box">
+                    <h3>Básico</h3>
+                    <div class="price-value">R$ 297</div>
+                    <ul><li><i class="fas fa-check"></i> Site completo</li><li><i class="fas fa-check"></i> 1 mês de suporte</li><li><i class="fas fa-check"></i> Hospedagem inclusa</li><li><i class="fas fa-check"></i> WhatsApp integrado</li></ul>
+                    <a href="https://wa.me/5521998912513" class="btn btn-primary">Escolher plano</a>
+                </div>
+                <div class="price-box popular">
+                    <h3>Profissional</h3>
+                    <div class="price-value">R$ 397</div>
+                    <ul><li><i class="fas fa-check"></i> Tudo do Básico</li><li><i class="fas fa-check"></i> Até 3 alterações</li><li><i class="fas fa-check"></i> 3 meses de suporte</li><li><i class="fas fa-check"></i> Design exclusivo</li></ul>
+                    <a href="https://wa.me/5521998912513" class="btn btn-primary">Escolher plano</a>
+                </div>
+                <div class="price-box">
+                    <h3>Premium</h3>
+                    <div class="price-value">R$ 497</div>
+                    <ul><li><i class="fas fa-check"></i> Tudo do Profissional</li><li><i class="fas fa-check"></i> 6 meses de suporte</li><li><i class="fas fa-check"></i> Manutenção mensal</li><li><i class="fas fa-check"></i> Prioridade no atendimento</li></ul>
+                    <a href="https://wa.me/5521998912513" class="btn btn-primary">Escolher plano</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">O que dizem <span>meus clientes</span></h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Site ficou incrível! Atendimento rápido e profissional."</p><div class="testimonial-name">- João Silva</div></div>
+                <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Recomendo demais! Fez exatamente o que eu precisava."</p><div class="testimonial-name">- Maria Santos</div></div>
+                <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Meu negócio decolou depois do site. Valeu cada centavo!"</p><div class="testimonial-name">- Carlos Oliveira</div></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo" style="font-size: 28px; font-weight: 800; background: linear-gradient(135deg, #00ff88, #00ccff); -webkit-background-clip: text; background-clip: text; color: transparent;">🚀 CRIO SITE</div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/crio.siteoficial" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/5521998912513" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>📱 WhatsApp: (21) 99891-2513</p>
+            <p class="footer-copy">© 2024 CRIO SITE - Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5521998912513" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        // Efeito Constelação
+        const canvas = document.getElementById('constellationCanvas');
+        const ctx = canvas.getContext('2d');
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        let particles = [];
+        const PARTICLE_COUNT = 80;
+        const CONNECTION_DISTANCE = 150;
+
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = (Math.random() - 0.5) * 0.3;
+                this.radius = 1.5;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0) this.x = width;
+                if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height;
+                if (this.y > height) this.y = 0;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#00ff88';
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+        }
+
+        function drawLines() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < CONNECTION_DISTANCE) {
+                        const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.3;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(0, 255, 136, ${opacity})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            for (let particle of particles) {
+                particle.update();
+                particle.draw();
+            }
+            drawLines();
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+
+        resizeCanvas();
+        initParticles();
+        animate();
+    </script>
+</body>
+</html>        }
 
         .nav {
             display: flex;
