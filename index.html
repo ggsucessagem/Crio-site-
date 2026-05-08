@@ -377,6 +377,63 @@
             color: #00ff88;
         }
 
+        /* Formulário de Contato */
+        .contact-form-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #00ff88;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background: #0a0a0a;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00ff88;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: #25D366;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #1da15b;
+            transform: translateY(-2px);
+        }
+
         /* Footer */
         .footer {
             background: #0a0a0a;
@@ -443,6 +500,9 @@
             .service-card h3 {
                 font-size: 12px;
                 padding: 10px;
+            }
+            .contact-form-wrapper {
+                padding: 25px;
             }
         }
     </style>
@@ -568,6 +628,37 @@
         </div>
     </section>
 
+    <!-- SEÇÃO DE CONTATO COM FORMULÁRIO (WhatsApp) -->
+    <section id="contact" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">Entre em <span>Contato</span></h2>
+            <p class="section-subtitle">Preencha o formulário e falaremos pelo WhatsApp</p>
+            <div class="contact-form-wrapper">
+                <form id="contatoForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Seu nome</label>
+                        <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Seu e-mail</label>
+                        <input type="email" id="email" placeholder="Digite seu melhor e-mail" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fab fa-whatsapp"></i> WhatsApp</label>
+                        <input type="tel" id="whatsapp" placeholder="(21) 99999-9999" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-comment"></i> Mensagem</label>
+                        <textarea id="mensagem" rows="5" placeholder="Fale sobre o site que você precisa..." required></textarea>
+                    </div>
+                    <button type="button" class="btn-submit" onclick="enviarWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> Enviar mensagem via WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-logo" style="font-size: 28px; font-weight: 800; background: linear-gradient(135deg, #00ff88, #00ccff); -webkit-background-clip: text; background-clip: text; color: transparent;">🚀 CRIO SITE</div>
@@ -576,7 +667,7 @@
                 <a href="https://wa.me/5521998912513" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </div>
             <p>📱 WhatsApp: (21) 99891-2513</p>
-            <p class="footer-copy">© 2024 CRIO SITE - Todos os direitos reservados</p>
+            <p class="footer-copy">© 2025 CRIO SITE - Todos os direitos reservados</p>
         </div>
     </footer>
 
@@ -657,6 +748,24 @@
             requestAnimationFrame(animate);
         }
 
+        // Função do formulário WhatsApp
+        function enviarWhatsApp() {
+            let nome = document.getElementById('nome').value;
+            let email = document.getElementById('email').value;
+            let whatsapp = document.getElementById('whatsapp').value;
+            let mensagem = document.getElementById('mensagem').value;
+
+            if (!nome || !email || !whatsapp || !mensagem) {
+                alert('⚠️ Por favor, preencha todos os campos antes de enviar.');
+                return;
+            }
+
+            let telefone = "5521998912513";
+            let texto = `Olá! Me chamo ${nome}.%0A%0A📧 E-mail: ${email}%0A📱 WhatsApp: ${whatsapp}%0A%0A💬 Mensagem:%0A${mensagem}%0A%0A*Gostaria de saber mais sobre os sites da CRIO SITE!*`;
+            let url = `https://wa.me/${telefone}?text=${texto}`;
+            window.open(url, '_blank');
+        }
+
         window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
         window.addEventListener('scroll', () => {
             const header = document.getElementById('header');
@@ -670,4 +779,3 @@
     </script>
 </body>
 </html>
-   
